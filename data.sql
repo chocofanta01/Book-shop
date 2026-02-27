@@ -55,3 +55,16 @@ SELECT cartItems.id, book_id, title, summary, quantity, price FROM cartItems LEF
 DELETE FROM cartItems WHERE id=?;
 
 SELECT * FROM Bookshop.cartItem WHERE user_id = 1 AND id IN (1, 3) //장바구니에서 선택한 아이템 조회
+
+//주문하기
+INSERT INTO delivery (address, receiver, contact) VALUES ("서울시 서초", "이지혁", "010-1235-5678") // 배송 정보 입력
+
+
+const delivery_id = SELECT max(id) FROM delivery;
+INSERT INTO orders (book_title, total_quantity, total_price, user_id, delivery_id)
+VALUES ("어린왕자들", 3, 60000, 1, delivery_id);
+
+
+const order_id = SELECT max(id) FROM orders;
+INSERT INTO orderedBook (order_id, book_id, quantity)
+VALUES (order_id, 1, 1); //주문 상세 목록 입력
