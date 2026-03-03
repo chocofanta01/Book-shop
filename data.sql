@@ -68,3 +68,11 @@ VALUES ("어린왕자들", 3, 60000, 1, delivery_id);
 const order_id = SELECT max(id) FROM orders;
 INSERT INTO orderedBook (order_id, book_id, quantity)
 VALUES (order_id, 1, 1); //주문 상세 목록 입력
+
+//결제된 항목 장바구니 삭제
+DELETE FROM cartItem WHERE id IN (1,2,3);
+
+//주문 목록 조회
+SELECT orders.id, book_title, total_quantity, total_price, created_at, address, receiver, contact
+FROM orders LEFT JOIN delivery 
+ON orders.delivery_id = delivery.id;
