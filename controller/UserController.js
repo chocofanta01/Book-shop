@@ -40,9 +40,10 @@ const login = (req, res) => {
 
             if (loginUser && loginUser.password == hashPassword) {
                 const token = jwt.sign({
+                    id : loginUser.id,
                     email: loginUser.email
                 }, process.env.PRIVATE_KEY, {
-                    expiresIn: '5m',
+                    expiresIn: '1m',
                     issuer: "jeahyuk"
                 });
                 //토큰 쿠키에 담기
