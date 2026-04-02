@@ -40,7 +40,7 @@ const login = (req, res) => {
 
             if (loginUser && loginUser.password == hashPassword) {
                 const token = jwt.sign({
-                    id : loginUser.id,
+                    id: loginUser.id,
                     email: loginUser.email
                 }, process.env.PRIVATE_KEY, {
                     expiresIn: '1m',
@@ -51,7 +51,7 @@ const login = (req, res) => {
                     httpOnly: true
                 });
                 console.log(token);
-                return res.status(StatusCodes.OK).json(results);
+                return res.status(StatusCodes.OK).json({ ...results[0], token: token });
             }
             else {
                 return res.status(StatusCodes.UNAUTHORIZED).end();
